@@ -1,1 +1,1 @@
-主要是使用`Laravel框架+php-amqplib包`来学习RabbitMQ
+主要是使用`Laravel框架+php-amqplib包`来学习RabbitMQ消息通信
