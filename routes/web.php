@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['namespace' => 'Demo'], function () {
+    // 尝试创建第一个生产者
+    Route::get('firstProducer', ['uses' => 'RabbitBaseController@firstProducer']);
+});
