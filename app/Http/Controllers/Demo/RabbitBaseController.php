@@ -42,13 +42,13 @@ class RabbitBaseController extends Controller
         $channel = $connection->channel();
 
         // 3
-        $channel->exchange_declare(
-            'ex1',
+        $exc = $channel->exchange_declare(
+            'ex2',
             'direct',
 
-            // 如果passive设置为true:
-            // rabbit-server会查看有没有名为test的exchange, 如果有就把名字什么的信息告诉你;没有就会直接报错
-            // 这个参数比较鸡肋, 不过倒是可以用来检查exchange是否存在
+            // 默认为false: rabbit-server 会查看有没有已存在的同名exchange, 没有则直接创建, 有则不会进行创建; **结果总是返回 null**
+            // 如果你希望查询交换机是否存在, 而又不想在查询时创建这个交换机, 设置为true即可; **如果存在则返回NULL**, 如果交换机不存在, 则会抛出一个错误的异常
+            // 这个参数比较鸡肋, 不过可以用来检查exchange是否存在 (与nowait参数无关)
             false,
 
             // 将exchange设置为持久的, 持久交换机在rabbit-server重启后会存在, 非持久的则会被清除
@@ -62,12 +62,13 @@ class RabbitBaseController extends Controller
         );
 
         // 4
-       $channel->queue_declare(
+        $q = $channel->queue_declare(
             // 队列名(后面如果不显示地绑定exchange与queue的话, 则默认将queue绑定到名为 (AMQP default) 的默认隐式交换机 (direct并且持久)
             'queue1',
 
-            // 如果为true: rabbit-server会查看有没有名为hello的queue, 如果有就把名字什么的信息告诉你; 如果没有就直接报错。(这个参数比较鸡肋, 不过倒是可以用来检查queue是否存在)
-            // 而false就是没有则创建, 有就什么也不做
+            // 默认为false: rabbit-server 会查看有没有已存在的同名queue, 没有则直接创建, 有则不进行创建; 无论创建与否, 结果都返回 **队列基础信息**
+            // 如果你希望查询队列是否存在, 而又不想在查询时创建这个队列, 设置此为true即可; 如果存在则返回 **队列基础信息**, 如果队列不存在, 则会抛出一个错误的异常
+            // 和 exchange 的 passive 参数不同的是, 此处队列声明的结果会返回 **队列基础信息**, 但是这是依赖于 `nowait` 参数, 如果nowait参数为默认值false, 则会返回, 如果为true, 则就返回null
             false,
 
             // true: 将queue设置为持久的, 持久队列在rabbit-server重启后会存在, 非持久的则会被清除
@@ -84,10 +85,12 @@ class RabbitBaseController extends Controller
             false,
 
             // 自动删除(默认是启用的, 队列将会在所有的消费者停止使用之后自动删除掉自身, 注意: 没有消费者不算, 只有在有了消费之后, 所有的消费者又断开后, 就会自动删除自己, 和durable无关)
-           false
+           false,
 
             // 其余更多参数属性, 后面会一一进行学习
+           true
         );
+       var_Dump($q);
 
         // 5
         // 将queue与exchange使用 bindingkey 进行绑定
