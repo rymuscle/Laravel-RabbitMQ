@@ -33,6 +33,7 @@ class RabbitBaseController extends Controller
             'guest',
             // 默认使用的就是 / 这个vhost
             '/'
+            // 其余更多参数属性, 后面会一一进行学习
         );
 
         // 2
@@ -54,6 +55,8 @@ class RabbitBaseController extends Controller
 
             // 自动删除(默认是启用的, 交换器将会在所有与其绑定的队列被删除后自动删除 (和durable无关)
             false
+
+            // 其余更多参数属性, 后面会一一进行学习
         );
 
         // 4
@@ -80,6 +83,8 @@ class RabbitBaseController extends Controller
 
             // 自动删除(默认是启用的, 队列将会在所有的消费者停止使用之后自动删除掉自身, 注意: 没有消费者不算, 只有在有了消费之后, 所有的消费者又断开后, 就会自动删除自己, 和durable无关)
            false
+
+            // 其余更多参数属性, 后面会一一进行学习
         );
 
         // 5
@@ -99,6 +104,7 @@ class RabbitBaseController extends Controller
             'routingkey1',  // 这里可以叫做bindingkey
             false,
             $arguments
+            // 其余更多参数属性, 后面会一一进行学习
         );
 
         // 6
@@ -122,6 +128,7 @@ class RabbitBaseController extends Controller
             'ex1',
             // routingkey 用于和 bindingkey 进行匹配 (如果没有设置routingkey或者设置的routingkey匹配不到对应的bindingkey,则消息会被Rabbit给丢弃)
             'routingkey1'
+            // 其余更多参数属性, 后面会一一进行学习
         );
 
         // 关闭信道
