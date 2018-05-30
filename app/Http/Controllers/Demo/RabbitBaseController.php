@@ -24,6 +24,8 @@ class RabbitBaseController extends Controller
         // 5. 通过信道--对exchange与queue进行绑定
         // 6. 创建消息
         // 7. 通过信道--发布消息
+        // 8. 关闭信道
+        // 9. 关闭连接
 
         // 1
         $connection = new AMQPStreamConnection(
@@ -131,9 +133,9 @@ class RabbitBaseController extends Controller
             // 其余更多参数属性, 后面会一一进行学习
         );
 
-        // 关闭信道
+        // 8
         $channel->close();
-        // 关闭connection
+        // 9
         $connection->close();
     }
 
