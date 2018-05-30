@@ -42,6 +42,15 @@ class RabbitBaseController extends Controller
         $channel = $connection->channel();
 
         // 3
+        // 声明exchange时, 可以使用AMQPTable对象来创建一些额外的说明参数
+        $arguments = new AMQPTable([
+                'arguments1' => '想写什么信息都行',
+                'arguments2' => [
+                    '想写什么信息都行, 比如声明是那条业务线的',
+                    '想写什么信息都行, 比如连接信息....',
+                ]
+            ]
+        );
         $exc = $channel->exchange_declare(
             'ex1',
             'direct',
@@ -56,9 +65,12 @@ class RabbitBaseController extends Controller
             true,
 
             // 自动删除(默认是启用的, 交换器将会在所有与其绑定的队列被删除后自动删除 (和durable无关)
-            false
+            false,
 
             // 其余更多参数属性, 后面会一一进行学习
+            false,
+            false,
+            $arguments
         );
 
         // 4
