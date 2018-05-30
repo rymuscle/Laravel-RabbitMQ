@@ -60,8 +60,8 @@ class RabbitBaseController extends Controller
        $channel->queue_declare(
             // 队列名(后面如果不显示地绑定exchange与queue的话, 则默认将queue绑定到名为 (AMQP default) 的默认隐式交换机 (direct并且持久)
             'queue1',
-            // 如果为true: rabbit-server会查看有没有名为hello的queue, 如果有就把名字什么的信息告诉你; 如果没有就直接报错。(这个参数比较鸡肋, 不过倒是可以用来检查queue是否存在)
 
+            // 如果为true: rabbit-server会查看有没有名为hello的queue, 如果有就把名字什么的信息告诉你; 如果没有就直接报错。(这个参数比较鸡肋, 不过倒是可以用来检查queue是否存在)
             // 而false就是没有则创建, 有就什么也不做
             false,
 
