@@ -51,7 +51,7 @@ class RabbitBaseController extends Controller
                 ]
             ]
         );
-        $exc = $channel->exchange_declare(
+        $exchange_declare_res = $channel->exchange_declare(
             'ex1',
             'direct',
 
@@ -72,9 +72,10 @@ class RabbitBaseController extends Controller
             false,
             $arguments
         );
+        var_dump($exchange_declare_res);
 
         // 4
-        $q = $channel->queue_declare(
+        $queue_declare_res = $channel->queue_declare(
             // 队列名(后面如果不显示地绑定exchange与queue的话, 则默认将queue绑定到名为 (AMQP default) 的默认隐式交换机 (direct并且持久)
             'queue1',
 
@@ -101,7 +102,7 @@ class RabbitBaseController extends Controller
 
             // 其余更多参数属性, 后面会一一进行学习
         );
-       var_Dump($q);
+       var_dump($queue_declare_res);
 
         // 5
         // 将queue与exchange使用 bindingkey 进行绑定
@@ -114,7 +115,7 @@ class RabbitBaseController extends Controller
                 ]
             ]
         );
-        $channel->queue_bind(
+        $queue_bind_res = $channel->queue_bind(
             'queue1',
             'ex1',
             'routingkey1',  // 这里可以叫做bindingkey
@@ -122,6 +123,7 @@ class RabbitBaseController extends Controller
             $arguments
             // 其余更多参数属性, 后面会一一进行学习
         );
+        var_dump($queue_bind_res);
 
         // 6
         $msg = new AMQPMessage(
