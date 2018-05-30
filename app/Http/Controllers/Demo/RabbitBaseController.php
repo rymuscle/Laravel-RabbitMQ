@@ -85,10 +85,9 @@ class RabbitBaseController extends Controller
             false,
 
             // 自动删除(默认是启用的, 队列将会在所有的消费者停止使用之后自动删除掉自身, 注意: 没有消费者不算, 只有在有了消费之后, 所有的消费者又断开后, 就会自动删除自己, 和durable无关)
-           false,
+           false
 
             // 其余更多参数属性, 后面会一一进行学习
-           true
         );
        var_Dump($q);
 
