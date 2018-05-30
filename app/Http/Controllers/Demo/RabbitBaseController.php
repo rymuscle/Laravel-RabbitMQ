@@ -43,7 +43,7 @@ class RabbitBaseController extends Controller
 
         // 3
         $exc = $channel->exchange_declare(
-            'ex2',
+            'ex1',
             'direct',
 
             // 默认为false: rabbit-server 会查看有没有已存在的同名exchange, 没有则直接创建, 有则不会进行创建; **结果总是返回 null**
