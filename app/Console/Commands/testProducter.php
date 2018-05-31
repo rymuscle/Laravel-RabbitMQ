@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class testConsumer extends Command
+class testProducter extends Command
 {
     /**
      * The name and signature of the console command.

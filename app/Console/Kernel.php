@@ -3,7 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\firstConsumer;
-use App\Console\Commands\testConsumer;
+use App\Console\Commands\testProducter;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         firstConsumer::class,
-        testConsumer::class
+        testProducter::class
     ];
 
     /**
