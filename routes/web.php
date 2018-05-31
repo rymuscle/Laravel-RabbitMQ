@@ -18,4 +18,5 @@ Route::get('/', function () {
 Route::group(['namespace' => 'Demo'], function () {
     // 尝试创建第一个生产者
     Route::get('firstProducer', ['uses' => 'RabbitBaseController@firstProducer']);
+    Route::get('testProperties', ['uses' => 'RabbitBaseController@testProperties']);
 });

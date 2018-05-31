@@ -35,7 +35,7 @@ class RabbitBaseController extends Controller
             'guest',
             // 默认使用的就是 / 这个vhost
             '/'
-            // 其余更多参数属性, 后面会一一进行学习
+        // 其余更多参数属性, 后面会一一进行学习
         );
 
         // 2
@@ -76,7 +76,7 @@ class RabbitBaseController extends Controller
 
         // 4
         $queue_declare_res = $channel->queue_declare(
-            // 队列名(后面如果不显示地绑定exchange与queue的话, 则默认将queue绑定到名为 (AMQP default) 的默认隐式交换机 (direct并且持久)
+        // 队列名(后面如果不显示地绑定exchange与queue的话, 则默认将queue绑定到名为 (AMQP default) 的默认隐式交换机 (direct并且持久)
             'queue1',
 
             // 默认为false: rabbit-server 会查看有没有已存在的同名queue, 没有则直接创建, 有则不进行创建; 无论创建与否, 结果都返回 **队列基础信息**
@@ -98,11 +98,11 @@ class RabbitBaseController extends Controller
             false,
 
             // 自动删除(默认是启用的, 队列将会在所有的消费者停止使用之后自动删除掉自身, 注意: 没有消费者不算, 只有在有了消费之后, 所有的消费者又断开后, 就会自动删除自己, 和durable无关)
-           false
+            false
 
-            // 其余更多参数属性, 后面会一一进行学习
+        // 其余更多参数属性, 后面会一一进行学习
         );
-       var_dump($queue_declare_res);
+        var_dump($queue_declare_res);
 
         // 5
         // 将queue与exchange使用 bindingkey 进行绑定
@@ -121,13 +121,13 @@ class RabbitBaseController extends Controller
             'routingkey1',  // 这里可以叫做bindingkey
             false,
             $arguments
-            // 其余更多参数属性, 后面会一一进行学习
+        // 其余更多参数属性, 后面会一一进行学习
         );
         var_dump($queue_bind_res);
 
         // 6
         $msg = new AMQPMessage(
-            // 消息实体, 使用时可以发送json
+        // 消息实体, 使用时可以发送json
             'Hello World!',
             // 第二个数组参数稍微复杂 (可以参考:https://github.com/php-amqplib/php-amqplib/blob/b7b677d046a9735e0ad940d649feaf38d58c866c/doc/AMQPMessage.md)
             [
@@ -140,13 +140,13 @@ class RabbitBaseController extends Controller
 
         // 7
         $channel->basic_publish(
-            // 发送的消息对象
+        // 发送的消息对象
             $msg,
             // 选择的exchange路由
             'ex1',
             // routingkey 用于和 bindingkey 进行匹配 (如果没有设置routingkey或者设置的routingkey匹配不到对应的bindingkey,则消息会被Rabbit给丢弃)
             'routingkey1'
-            // 其余更多参数属性, 后面会一一进行学习
+        // 其余更多参数属性, 后面会一一进行学习
         );
 
         // 8
@@ -155,4 +155,49 @@ class RabbitBaseController extends Controller
         $connection->close();
     }
 
+    // 属性测试
+    public function testProperties()
+    {
+        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest', '/');
+
+        $channel = $connection->channel();
+
+        $channel->exchange_declare('ex1', 'direct', false, true, false, false, false);
+
+        $channel->queue_declare('queue1', false, true, false, false);
+
+        $channel->queue_bind('queue1', 'ex1', 'routingkey1');
+
+        $msg = new AMQPMessage('Hello World!', ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, 'content_type' => 'text/plain']);
+
+        $wait = true;
+        $returnListener = function (
+            $replyCode,
+            $replyText,
+            $exchange,
+            $routingKey,
+            $message
+        ) use ($wait) {
+            $GLOBALS['wait'] = false;
+            echo "return: ",
+            $replyCode, "\n",
+            $replyText, "\n",
+            $exchange, "\n",
+            $routingKey, "\n",
+            $message->body, "\n";
+        };
+
+        // 监听没有成功路由到队列的消息
+        $channel->set_return_listener($returnListener);
+
+        $channel->basic_publish($msg, 'ex1', 'routingkey123', true, false);
+
+        while ($wait) {
+            $channel->wait();
+        }
+
+        $channel->close();
+
+        $connection->close();
+    }
 }
