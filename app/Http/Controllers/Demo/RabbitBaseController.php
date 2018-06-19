@@ -62,7 +62,7 @@ class RabbitBaseController extends Controller
 
             // 将exchange设置为持久的, 持久交换机在rabbit-server重启后会存在, 非持久的则会被清除
             // 在使用中推荐设置为 true
-            true,
+            false,
 
             // 自动删除(默认是启用的, 交换器将会在所有与其绑定的队列被删除后自动删除 (和durable无关)
             false,
@@ -134,6 +134,9 @@ class RabbitBaseController extends Controller
                 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT,
                 // MIME content type
                 'content_type' => 'text/plain'
+                // 当然, 此处还可以设置很多其他属性
+                // priority
+                // 可参考 https://www.kancloud.cn/xsnet/xinshangjingyan/297806
             ]
         );
 
@@ -166,6 +169,54 @@ class RabbitBaseController extends Controller
         $channel->queue_declare('queue1', false, true, false, false);
 
         $channel->queue_bind('queue1', 'ex1', 'routingkey1');
+
+        $msg = new AMQPMessage('Hello World!', ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, 'content_type' => 'text/plain']);
+
+        $wait = true;
+        $returnListener = function (
+            $replyCode,
+            $replyText,
+            $exchange,
+            $routingKey,
+            $message
+        ) use ($wait) {
+            $GLOBALS['wait'] = false;
+            echo "return: ",
+            $replyCode, "\n",
+            $replyText, "\n",
+            $exchange, "\n",
+            $routingKey, "\n",
+            $message->body, "\n";
+        };
+
+        // 监听没有成功路由到队列的消息
+        $channel->set_return_listener($returnListener);
+
+        $channel->basic_publish($msg, 'ex1', 'routingkey123', true, false);
+
+        while ($wait) {
+            $channel->wait();
+        }
+
+        $channel->close();
+
+        $connection->close();
+    }
+
+    /**
+     * Qos测试
+     */
+    public function testQosProducer()
+    {
+        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest', '/');
+
+        $channel = $connection->channel();
+
+        $channel->exchange_declare('ex2', 'direct', false, true, false, false, false);
+
+        $channel->queue_declare('queue2', false, true, false, false);
+
+        $channel->queue_bind('queue2', 'ex2', 'routingkey2');
 
         $msg = new AMQPMessage('Hello World!', ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, 'content_type' => 'text/plain']);
 

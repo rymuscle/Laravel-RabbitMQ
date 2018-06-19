@@ -3,7 +3,13 @@
 namespace App\Console;
 
 use App\Console\Commands\firstConsumer;
+use App\Console\Commands\priorityConsumer1;
+use App\Console\Commands\priorityConsumer2;
 use App\Console\Commands\testProducter;
+use App\Console\Commands\testQosConsumer1;
+use App\Console\Commands\testQosConsumer2;
+use App\Console\Commands\testQosConsumerPrefetchCount1;
+use App\Console\Commands\testQosConsumerPrefetchCount2;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,7 +23,13 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         firstConsumer::class,
-        testProducter::class
+        testProducter::class,
+        testQosConsumer1::class,
+        testQosConsumer2::class,
+        testQosConsumerPrefetchCount1::class,
+        testQosConsumerPrefetchCount2::class,
+        priorityConsumer1::class,
+        priorityConsumer2::class
     ];
 
     /**
