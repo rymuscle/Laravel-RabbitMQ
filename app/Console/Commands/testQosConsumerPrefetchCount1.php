@@ -41,6 +41,7 @@ class testQosConsumerPrefetchCount1 extends Command
         $connection = new AMQPStreamConnection('127.0.0.1', 5672, 'guest', 'guest');
         $channel = $connection->channel();
         // 当你尝试设置prefetch_size大于0时,将会提示你 "NOR_IMPLEMENTED - prefetch_size!=0" 即 该参数rabbitmq暂未实现
+        // 此处主要是关注设置 prefetch_count预取限制 来进行测试
         $channel->basic_qos(0, 100, false);
         $channel->exchange_declare('testQosExchange', 'direct', false, true, false);
         $channel->queue_declare('testQosQueue', false, true, false, false);
@@ -49,6 +50,7 @@ class testQosConsumerPrefetchCount1 extends Command
             echo "\n--------\n";
             echo $message->body;
             echo "\n--------\n";
+            // 模拟业务耗时
             sleep(5);
             // ack
             $message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);
