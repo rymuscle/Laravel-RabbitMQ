@@ -42,7 +42,7 @@ class priorityConsumer1 extends Command
         $connection = new AMQPStreamConnection('127.0.0.1', 5672, 'guest', 'guest');
         $channel = $connection->channel();
         // 模拟高优先级消费者处于阻塞状态 (需要结合下面的sleep)
-        $channel->basic_qos(null, 1, null);
+        $channel->basic_qos(null, 1, false);
         $channel->exchange_declare('ext_test_priority_consumer', 'direct', false, true, false);
         $channel->queue_declare('queue_test_priority_consumer', false, true, false, false);
         $channel->queue_bind('queue_test_priority_consumer', 'ext_test_priority_consumer', 'routingkey');
