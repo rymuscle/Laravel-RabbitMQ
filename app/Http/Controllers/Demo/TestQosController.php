@@ -32,7 +32,7 @@ class TestQosController extends Controller
 
         // 此处只用与测试, 因此暂时先不使用 "事务" 或 "发送方确认" 来保证消息的完整投递, 后面将会有例子来学习
         //
-//        for ($i = 1; $i <= 10; $i++) {
+//        for ($i = 1; $i <= 100; $i++) {
         for ($i = 1; $i <= 10; $i++) {
             $msg = new AMQPMessage('Hello World!' . $i, ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, 'content_type' => 'text/plain']);
             $channel->basic_publish($msg, 'testQosExchange', 'routingkey', true, false);

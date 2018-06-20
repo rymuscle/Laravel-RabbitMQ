@@ -41,8 +41,8 @@ class msgPriorityConsumer extends Command
     {
         $connection = new AMQPStreamConnection('127.0.0.1', 5672, 'guest', 'guest');
         $channel = $connection->channel();
-        // 禁用, 1, 2,
-        $channel->basic_qos(0, 2, false);
+        // 禁用, 1, 2, 10(10就尴尬了...)
+        $channel->basic_qos(0, 1, false);
         $channel->exchange_declare('msgPriorityExc', 'direct', false, true, false);
         $arguments = new AMQPTable([
                 'x-max-priority' => 10,
