@@ -25,6 +25,8 @@ Route::group(['namespace' => 'Demo'], function () {
     Route::get('testQos', ['uses' => 'TestQosController@testQosProducer']);
     // 测试死信
     Route::get('testDlx', ['uses' => 'DlxController@testDlxProducer']);
-    // 测试消息优先级
+    // 测试消费者优先级
     Route::get('testCustomerPriority', ['uses' => 'TestPriorityConsumerController@producer']);
+    // 测试消息优先级
+    Route::get('msgPriority', ['uses' => 'MsgPriorityController@producer']);
 });
