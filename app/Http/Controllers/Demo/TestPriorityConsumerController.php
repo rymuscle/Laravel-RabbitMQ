@@ -32,7 +32,7 @@ class TestPriorityConsumerController extends Controller
 
         $msg = new AMQPMessage('Hello World!' , ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, 'content_type' => 'text/plain']);
 
-        $channel->basic_publish($msg, 'ext_test_priority_consumer', 'routingkey', true, false);
+        $channel->basic_publish($msg, 'ext_test_priority_consumer', 'routingkey', false, false);
 
         $channel->close();
 

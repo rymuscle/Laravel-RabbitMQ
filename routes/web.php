@@ -29,4 +29,8 @@ Route::group(['namespace' => 'Demo'], function () {
     Route::get('testCustomerPriority', ['uses' => 'TestPriorityConsumerController@producer']);
     // 测试消息优先级
     Route::get('msgPriority', ['uses' => 'MsgPriorityController@producer']);
+    // 消息长度限制测试
+    Route::get('queueLength', ['uses' => 'QueueLengthLimitController@producer']);
+    // 消费者确认
+    Route::get('ack', ['uses' => 'ConsumerConfirmController@producer']);
 });

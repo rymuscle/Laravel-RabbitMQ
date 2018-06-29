@@ -50,16 +50,16 @@ class MsgPriorityController extends Controller
         $msg8 = new AMQPMessage('Hello World - 8', ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, 'content_type' => 'text/plain', 'priority' => 8]);
         $msg9 = new AMQPMessage('Hello World - 9', ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, 'content_type' => 'text/plain', 'priority' => 9]);
         $msg10 = new AMQPMessage('Hello World - 10', ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, 'content_type' => 'text/plain', 'priority' => 10]);
-        $channel->basic_publish($msg7, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg8, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg10, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg5, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg6, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg4, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg9, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg1, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg3, 'msgPriorityExc', 'routingkey', true, false);
-        $channel->basic_publish($msg2, 'msgPriorityExc', 'routingkey', true, false);
+        $channel->basic_publish($msg7, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg8, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg10, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg5, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg6, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg4, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg9, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg1, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg3, 'msgPriorityExc', 'routingkey', false, false);
+        $channel->basic_publish($msg2, 'msgPriorityExc', 'routingkey', false, false);
 
         $channel->close();
 

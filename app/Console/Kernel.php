@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\consumerConfirm;
 use App\Console\Commands\firstConsumer;
 use App\Console\Commands\msgPriorityConsumer;
 use App\Console\Commands\priorityConsumer1;
@@ -31,7 +32,8 @@ class Kernel extends ConsoleKernel
         testQosConsumerPrefetchCount2::class,
         priorityConsumer1::class,
         priorityConsumer2::class,
-        msgPriorityConsumer::class
+        msgPriorityConsumer::class,
+        consumerConfirm::class
     ];
 
     /**

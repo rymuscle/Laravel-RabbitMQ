@@ -35,7 +35,7 @@ class DlxController extends Controller
                 // 指定死信交换机
                 'x-dead-letter-exchange' => 'testDlxExchange',
                 // 指定死信路由键
-//                'x-dead-letter-routing-key' => 'testDlxRoutingKey'
+                'x-dead-letter-routing-key' => 'testDlxRoutingKey'
         ]);
 
         $channel->queue_declare('testDlxQueue', false, true, false, false, false, $arguments);
