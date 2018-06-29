@@ -7,10 +7,10 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
- * Class ConsumerConfirmController
+ * Class ConfirmHandlerController
  * @package App\Http\Controllers\Demo
  */
-class ConsumerConfirmController extends Controller
+class ConfirmHandlerController extends Controller
 {
 
     public function producer()

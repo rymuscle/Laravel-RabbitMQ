@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Demo;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
-use PhpAmqpLib\Wire\AMQPTable;
 
 /**
  * Class TestPriorityConsumerController
