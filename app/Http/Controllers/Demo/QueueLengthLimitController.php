@@ -37,10 +37,6 @@ class QueueLengthLimitController extends Controller
                 ]
             ]
         );
-        $channel->basic_ack(8, false);
-        $channel->basic_reject(8, false);
-        $channel->basic_nack(8, false, true);
-        $channel->basic_cancel(8, false);
 
         $channel->queue_declare('lengthLimitQueue', false, true, false, false, false, $arguments);
 
