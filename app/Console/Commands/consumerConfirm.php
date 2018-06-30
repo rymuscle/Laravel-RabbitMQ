@@ -57,7 +57,7 @@ class consumerConfirm extends Command
                     //$message->delivery_info['channel']->basic_reject(100, true);
                     // $message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);
                     // 也可以把channel传进回调函数中, 直接使用$channel
-                    $channel->basic_ack($message->delivery_info['delivery_tag']);
+                    $channel->basic_ack($message->delivery_info['delivery_tag'], false);
                     break;
                 case 'reject' :
                     // basic_nack, basic_reject 是 Negative Ack

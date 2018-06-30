@@ -32,5 +32,8 @@ Route::group(['namespace' => 'Demo'], function () {
     // 消息长度限制测试
     Route::get('queueLength', ['uses' => 'QueueLengthLimitController@producer']);
     // 消费者确认
-    Route::get('ack', ['uses' => 'ConsumerConfirmController@producer']);
+    Route::get('consumerAck', ['uses' => 'ConsumerConfirmController@producer']);
+
+    // publisher 确认
+    Route::get('publisherAck', ['uses' => 'PublisherConfirmController@producer']);
 });
