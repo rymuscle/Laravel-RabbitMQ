@@ -7,7 +7,7 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
- * Class ConfirmHandlerController
+ * Class PublisherConfirmController
  * @package App\Http\Controllers\Demo
  */
 class PublisherConfirmController extends Controller
