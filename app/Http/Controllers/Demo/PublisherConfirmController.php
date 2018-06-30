@@ -30,6 +30,7 @@ class PublisherConfirmController extends Controller
 
         // 手册指出,只有在负责队列的Erlang进程中发生内部错误时才会回应nack. 所以这个在测试中也一直没有使用set_nack_handler捕获到错误
         $set_nack_handler = function (AMQPMessage $message) {
+            // 比如可以对消息进行重发
             echo "Message nacked with content " . $message->body . PHP_EOL;
         };
         $channel->set_nack_handler($set_nack_handler);

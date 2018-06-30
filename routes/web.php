@@ -36,4 +36,7 @@ Route::group(['namespace' => 'Demo'], function () {
 
     // publisher 确认
     Route::get('publisherAck', ['uses' => 'PublisherConfirmController@producer']);
+
+    // lazy queue
+    Route::get('lazyQueue', ['uses' => 'LazyQueueController@producer']);
 });
