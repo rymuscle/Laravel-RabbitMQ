@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Console\Commands\consumerConfirm;
+use App\Console\Commands\dlxBusinessOriginConsumer;
+use App\Console\Commands\dlxConsumer;
 use App\Console\Commands\firstConsumer;
 use App\Console\Commands\msgPriorityConsumer;
 use App\Console\Commands\priorityConsumer1;
@@ -33,7 +35,9 @@ class Kernel extends ConsoleKernel
         priorityConsumer1::class,
         priorityConsumer2::class,
         msgPriorityConsumer::class,
-        consumerConfirm::class
+        consumerConfirm::class,
+        dlxConsumer::class,
+        dlxBusinessOriginConsumer::class
     ];
 
     /**

@@ -22,9 +22,9 @@ Route::group(['namespace' => 'Demo'], function () {
     Route::get('testProperties', ['uses' => 'RabbitBaseController@testProperties']);
 
     // 测试消息预取Qos
-    Route::get('testQos', ['uses' => 'TestQosController@testQosProducer']);
+    Route::get('qos', ['uses' => 'TestQosController@testQosProducer']);
     // 测试死信
-    Route::get('testDlx', ['uses' => 'DlxController@testDlxProducer']);
+    Route::get('dlx', ['uses' => 'DlxController@producer']);
     // 测试消费者优先级
     Route::get('testCustomerPriority', ['uses' => 'TestPriorityConsumerController@producer']);
     // 测试消息优先级
