@@ -5,14 +5,14 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-class testQosConsumer1 extends Command
+class qosConsumer2 extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'testQosConsumer1';
+    protected $signature = 'qosConsumer2';
 
     /**
      * The console command description.
@@ -40,18 +40,21 @@ class testQosConsumer1 extends Command
     {
         $connection = new AMQPStreamConnection('127.0.0.1', 5672, 'guest', 'guest');
         $channel = $connection->channel();
-        $channel->exchange_declare('testQosExchange', 'direct', false, true, false);
-        $channel->queue_declare('testQosQueue', false, true, false, false);
-        $channel->queue_bind('testQosQueue', 'testQosExchange', 'routingkey');
+        $channel->exchange_declare('qosExchange', 'direct', false, true, false);
+        $channel->queue_declare('qosQueue', false, true, false, false);
+        $channel->queue_bind('qosQueue', 'qosExchange', 'routingkey');
+
+        // 6
         $backCall = function ($message) {
             echo "\n--------\n";
             echo $message->body;
             echo "\n--------\n";
+            // 模拟处理能力差
+            sleep(5);
             // ack
             $message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);
         };
-
-        $channel->basic_consume('testQosQueue', '', false, false, false, false, $backCall);
+        $channel->basic_consume('qosQueue', '', false, false, false, false, $backCall);
 
         while (count($channel->callbacks)) {
             $channel->wait();

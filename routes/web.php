@@ -22,11 +22,11 @@ Route::group(['namespace' => 'Demo'], function () {
     Route::get('testProperties', ['uses' => 'RabbitBaseController@testProperties']);
 
     // 测试消息预取Qos
-    Route::get('qos', ['uses' => 'TestQosController@testQosProducer']);
+    Route::get('qos', ['uses' => 'QosController@producer']);
     // 测试死信
     Route::get('dlx', ['uses' => 'DlxController@producer']);
     // 测试消费者优先级
-    Route::get('testCustomerPriority', ['uses' => 'TestPriorityConsumerController@producer']);
+    Route::get('testCustomerPriority', ['uses' => 'PriorityConsumerController@producer']);
     // 测试消息优先级
     Route::get('msgPriority', ['uses' => 'MsgPriorityController@producer']);
     // 消息长度限制测试
@@ -39,4 +39,7 @@ Route::group(['namespace' => 'Demo'], function () {
 
     // lazy queue
     Route::get('lazyQueue', ['uses' => 'LazyQueueController@producer']);
+
+    // cluster
+    Route::get('cluster', ['uses' => 'LocalClusterController@producer']);
 });

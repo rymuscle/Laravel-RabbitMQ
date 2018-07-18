@@ -149,7 +149,6 @@ class RabbitBaseController extends Controller
             'routingkey1'
         // 其余更多参数属性, 后面会一一进行学习
         );
-
         // 8
         $channel->close();
         // 9

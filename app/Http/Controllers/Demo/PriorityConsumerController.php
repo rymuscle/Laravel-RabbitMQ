@@ -10,7 +10,7 @@ use PhpAmqpLib\Message\AMQPMessage;
  * Class TestPriorityConsumerController
  * @package App\Http\Controllers\Demo
  */
-class TestPriorityConsumerController extends Controller
+class PriorityConsumerController extends Controller
 {
 
     /**
