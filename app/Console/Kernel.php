@@ -8,13 +8,13 @@ use App\Console\Commands\dlxBusinessOriginConsumer;
 use App\Console\Commands\dlxConsumer;
 use App\Console\Commands\firstConsumer;
 use App\Console\Commands\msgPriorityConsumer;
+use App\Console\Commands\prefetchCountConsumer1;
+use App\Console\Commands\prefetchCountConsumer2;
 use App\Console\Commands\priorityConsumer1;
 use App\Console\Commands\priorityConsumer2;
 use App\Console\Commands\testProducter;
 use App\Console\Commands\qosConsumer1;
 use App\Console\Commands\qosConsumer2;
-use App\Console\Commands\qosConsumerPrefetchCount1;
-use App\Console\Commands\qosConsumerPrefetchCount2;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -31,8 +31,8 @@ class Kernel extends ConsoleKernel
         testProducter::class,
         qosConsumer1::class,
         qosConsumer2::class,
-        qosConsumerPrefetchCount1::class,
-        qosConsumerPrefetchCount2::class,
+        prefetchCountConsumer1::class,
+        prefetchCountConsumer2::class,
         priorityConsumer1::class,
         priorityConsumer2::class,
         msgPriorityConsumer::class,

@@ -23,6 +23,7 @@ Route::group(['namespace' => 'Demo'], function () {
 
     // 测试消息预取Qos
     Route::get('qos', ['uses' => 'QosController@producer']);
+    Route::get('prefetchCount', ['uses' => 'PrefetchCountController@producer']);
     // 测试死信
     Route::get('dlx', ['uses' => 'DlxController@producer']);
     // 测试消费者优先级
