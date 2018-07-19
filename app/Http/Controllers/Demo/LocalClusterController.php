@@ -17,7 +17,9 @@ class LocalClusterController extends Controller
     {
         $connection = new AMQPStreamConnection(
             'localhost',
-            5673,
+            5672,
+            // rabbit节点宕机后, 测试连接rabbit_1节点(5673端口)创建同名的持久化队列, 会报错
+            //5673,
             'guest',
             'guest',
             '/'
@@ -32,7 +34,7 @@ class LocalClusterController extends Controller
             ]
         );
         $channel->exchange_declare(
-            'exc',
+            'localClusterExchange',
             'direct',
             false,
             true,
@@ -42,7 +44,7 @@ class LocalClusterController extends Controller
             $arguments
         );
         $channel->queue_declare(
-            'queue',
+            'localClusterQueue',
             false,
             true,
             false,
@@ -57,8 +59,8 @@ class LocalClusterController extends Controller
             ]
         );
         $channel->queue_bind(
-            'queue',
-            'exc',
+            'localClusterQueue',
+            'localClusterExchange',
             'routingkey',
             false,
             $arguments
@@ -72,7 +74,7 @@ class LocalClusterController extends Controller
         );
         $channel->basic_publish(
             $msg,
-            'exc',
+            'localClusterExchange',
             'routingkey'
         );
         $channel->close();

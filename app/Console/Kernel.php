@@ -10,6 +10,7 @@ use App\Console\Commands\firstConsumer;
 use App\Console\Commands\msgPriorityConsumer;
 use App\Console\Commands\prefetchCountConsumer1;
 use App\Console\Commands\prefetchCountConsumer2;
+use App\Console\Commands\prefetchCountConsumer3;
 use App\Console\Commands\priorityConsumer1;
 use App\Console\Commands\priorityConsumer2;
 use App\Console\Commands\testProducter;
@@ -33,6 +34,7 @@ class Kernel extends ConsoleKernel
         qosConsumer2::class,
         prefetchCountConsumer1::class,
         prefetchCountConsumer2::class,
+        prefetchCountConsumer3::class,
         priorityConsumer1::class,
         priorityConsumer2::class,
         msgPriorityConsumer::class,
