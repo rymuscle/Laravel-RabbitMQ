@@ -14,7 +14,7 @@ use PhpAmqpLib\Wire\AMQPTable;
 class RabbitBaseController extends Controller
 {
     // 尝试创建第一个生产者
-    public function firstProducer()
+    public function producer()
     {
         // 1. 创建与Rabbit Server的TCP连接
         // 2. 创建信道
