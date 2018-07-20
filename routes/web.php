@@ -42,6 +42,9 @@ Route::group(['namespace' => 'Demo'], function () {
     // lazy queue
     Route::get('lazyQueue', ['uses' => 'LazyQueueController@producer']);
 
+    // 事务
+    Route::get('tx', ['uses' => 'TxController@producer']);
+
     // cluster
     Route::get('localCluster', ['uses' => 'LocalClusterController@producer']);
 });

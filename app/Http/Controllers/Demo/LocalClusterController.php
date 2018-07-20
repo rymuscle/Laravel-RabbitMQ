@@ -17,9 +17,9 @@ class LocalClusterController extends Controller
     {
         $connection = new AMQPStreamConnection(
             'localhost',
-            5672,
+//            5672,
             // rabbit节点宕机后, 测试连接rabbit_1节点(5673端口)创建同名的持久化队列, 会报错
-            //5673,
+            5673,
             'guest',
             'guest',
             '/'
