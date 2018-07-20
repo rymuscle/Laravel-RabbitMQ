@@ -8,10 +8,10 @@ use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Wire\AMQPTable;
 
 /**
- * Class RabbitmqBaseController
+ * Class ParamsDetailController
  * @package App\Http\Controllers\Demo
  */
-class RabbitBaseController extends Controller
+class ParamsDetailController extends Controller
 {
     // 尝试创建第一个生产者
     public function producer()
